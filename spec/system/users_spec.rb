@@ -4,7 +4,7 @@ RSpec.describe 'ユーザー新規登録', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
-  context 'ユーザー新規登録ができるとき' do 
+  context 'ユーザー新規登録ができるとき' do
     it '正しい情報を入力すればユーザー新規登録ができてトップページに移動する' do
       # トップページに移動する
       visit root_path
@@ -21,13 +21,13 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       fill_in 'user[first_name]', with: @user.first_name
       fill_in 'user[last_name_kana]', with: @user.last_name_kana
       fill_in 'user[first_name_kana]', with: @user.first_name_kana
-      select '2000',from: 'user[birth_date(1i)]'
-      select '1',from: 'user[birth_date(2i)]'
-      select '1',from: 'user[birth_date(3i)]'
+      select '2000', from: 'user[birth_date(1i)]'
+      select '1', from: 'user[birth_date(2i)]'
+      select '1', from: 'user[birth_date(3i)]'
       # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(1)
+      end.to change { User.count }.by(1)
       # トップページへ遷移したことを確認する
       expect(current_path).to eq(root_path)
       # ログアウトボタンが表示されることを確認する
@@ -54,13 +54,13 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       fill_in 'user[first_name]', with: ''
       fill_in 'user[last_name_kana]', with: ''
       fill_in 'user[first_name_kana]', with: ''
-      select '--',from: 'user[birth_date(1i)]'
-      select '--',from: 'user[birth_date(2i)]'
-      select '--',from: 'user[birth_date(3i)]'
+      select '--', from: 'user[birth_date(1i)]'
+      select '--', from: 'user[birth_date(2i)]'
+      select '--', from: 'user[birth_date(3i)]'
       # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(0)
+      end.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq user_registration_path
     end
