@@ -2,6 +2,12 @@ class ItemsController < ApplicationController
   def index
   end
 
+  def new
+  end
+
+  def create
+  end
+
 
   #画像の保存を許可するストロングパラメーターにしましょう
   # private
