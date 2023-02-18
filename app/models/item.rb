@@ -1,10 +1,11 @@
 class Item < ApplicationRecord
-  belongs_to :user
-  belongs_to :catedory
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user 
+  belongs_to :catedory, optional: true
   belongs_to :sales_status
   belongs_to :shipping_fee_status
   belongs_to :prefecture
-  belongs_to :schedued_delivery
+  belongs_to :schedued_delivery, optional: true
   has_one_attached :image
 
   validates :item_name, presence: true
