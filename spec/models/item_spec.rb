@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('app/assets/images/flag.png')
   end
 
   describe '商品の出品' do
@@ -78,6 +77,11 @@ RSpec.describe Item, type: :model do
         @item.item_price = 'aaaaaa'
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price is invalid.Input half-width characters.')
+      end
+      it 'ユーザーが紐付いていなければ投稿できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
