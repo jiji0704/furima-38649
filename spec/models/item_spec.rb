@@ -19,29 +19,29 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it '商品名が空では登録できない' do
-        @item.item_name = ''
+        @item.name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item name can't be blank")
+        expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it '商品の説明が空では登録できない' do
-        @item.item_information = ''
+        @item.info = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item information can't be blank")
+        expect(@item.errors.full_messages).to include("Info can't be blank")
       end
       it '商品の詳細・カテゴリーが---では登録できない' do
-        @item.item_category_id = '1'
+        @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item category can't be blank")
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it '商品の詳細・状態が---では登録できない' do
-        @item.item_sales_status_id = '1'
+        @item.sales_status_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item sales status can't be blank")
+        expect(@item.errors.full_messages).to include("Sales status can't be blank")
       end
       it '配送について・配送料の負担が---では登録できない' do
-        @item.item_shipping_fee_status_id = '1'
+        @item.shipping_fee_status_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item shipping fee status can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
       end
       it '配送について・配送元の地域が---では登録できない' do
         @item.prefecture_id = '1'
@@ -49,34 +49,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '配送について・配送までの日数が---では登録できない' do
-        @item.item_scheduled_delivery_id = '1'
+        @item.scheduled_delivery_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item scheduled delivery can't be blank")
+        expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
       end
       it '販売価格が空では登録できない' do
-        @item.item_price = ''
+        @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price can't be blank")
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '販売価格が299では登録できない' do
-        @item.item_price = '299'
+        @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item price is out of setting range')
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it '販売価格が10000000では登録できない' do
-        @item.item_price = '10000000'
+        @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item price is out of setting range')
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it '販売価格が全角数字では登録できない' do
-        @item.item_price = '１０００'
+        @item.price = '１０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item price is invalid.Input half-width characters.')
+        expect(@item.errors.full_messages).to include('Price is invalid.Input half-width characters.')
       end
       it '販売価格が半角英字では登録できない' do
-        @item.item_price = 'aaaaaa'
+        @item.price = 'aaaaaa'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item price is invalid.Input half-width characters.')
+        expect(@item.errors.full_messages).to include('Price is invalid.Input half-width characters.')
       end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @item.user = nil
