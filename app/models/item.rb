@@ -8,15 +8,19 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
   has_one_attached :image
 
-  validates :image, presence: true
-  validates :item_name, presence: true
-  validates :item_information, presence: true
-  validates :item_category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :item_sales_status_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :item_shipping_fee_status_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :item_scheduled_delivery_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :item_price, presence: true, numericality: { with: /\A[0-9]+\z/, message: 'is invalid.Input half-width characters.' }
-  validates :item_price,
-            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
+
+  with_options presence: true do
+    validates :image
+    validates :item_name
+    validates :item_information
+    validates :item_category_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :item_sales_status_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :item_shipping_fee_status_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :item_scheduled_delivery_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :item_price, numericality: { only_integer: true, message: 'is invalid.Input half-width characters.' }
+  end
+    validates :item_price,
+              numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
+  
 end
