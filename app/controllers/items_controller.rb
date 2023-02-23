@@ -43,20 +43,18 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in?
+    return if user_signed_in?
+
     redirect_to root_path
-    end
   end
 
-
   def ensure_user
-    unless @item.user_id == current_user.id
+    return if @item.user_id == current_user.id
+
     redirect_to root_path
-    end
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
-
 end
