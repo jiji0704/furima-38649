@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :ensure_user, only: [:edit, :update, :destroy]
+  before_action :sold_out,only: [:edit, :update, :destroy]
 
   def index
     @item = Item.all.order('created_at DESC')
@@ -55,4 +56,11 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def sold_out  
+    unless @item.order == nil #購入履歴があれば
+     redirect_to root_path
+    end
+  end
+
 end
