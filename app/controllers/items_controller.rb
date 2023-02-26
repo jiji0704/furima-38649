@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
   end
 
   def sold_out
-    return if @item.order.nil? # 購入履歴があれば
+    return if @item.order.nil? 
 
     redirect_to root_path
   end
