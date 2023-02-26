@@ -55,6 +55,11 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include('Phone number is too short')
       end
+      it 'phone_numberが12桁以上だと保存できないこと' do
+        @order_shipping.phone_number = '090123456789'
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include('Phone number is invalid')
+      end
       it 'phone_numberが半角英字では登録できない' do
         @order_shipping.phone_number = 'aaaaaaaaaaa'
         @order_shipping.valid?

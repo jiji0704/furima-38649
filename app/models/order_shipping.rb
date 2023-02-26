@@ -13,6 +13,7 @@ class OrderShipping
     validates :token
   end
   validates :phone_number, length: { minimum: 10, message: 'is too short' }
+  validates :phone_number, length: { maximum: 11, message: 'is invalid' }
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
     Shipping.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, addresses: addresses,
