@@ -4,3 +4,24 @@ img {
   /* 縦横比を保ったまま、画像を縦横100pxのサイズに収めるプロパティです */
   object-fit: contain;
 }
+
+.other-images {
+  display: flex;
+  justify-content: center;
+}
+
+.other-image {
+  margin: 10px;
+}
+
+.image-delete-button {
+  text-align: center;
+  border: solid 1px;
+  cursor: pointer;
+}
+
+.main-image {
+  height: 50vh;
+  width: 60vw;
+  object-fit: contain;
+}
