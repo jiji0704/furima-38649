@@ -7,10 +7,11 @@ img {
 
 .other-images {
   display: flex;
+  justify-content: center;
 }
 
 .other-image {
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .image-delete-button {
@@ -20,6 +21,7 @@ img {
 }
 
 .main-image {
-  height: 200px;
-  width: 200px;
+  height: 50vh;
+  width: 60vw;
+  object-fit: contain;
 }
