@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     validates :shipping_fee_status_id, numericality: { other_than: 1, message: "を入力してください" }
     validates :prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
     validates :scheduled_delivery_id, numericality: { other_than: 1, message: "を入力してください" }
-    validates :price, numericality: { only_integer: true, message: 'は無効です。半角数字で入力してください' }
+    validates :price, numericality: { only_integer: true, message: 'は不正な値です。半角数字で入力してください' }
   end
   validates :images, length: { minimum: 1, maximum: 5, message: "は1枚以上5枚以下にしてください" }
   validates :price,
