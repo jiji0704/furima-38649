@@ -8,6 +8,8 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
   has_many_attached :images
   has_one :order
+  
+  has_many :favorites, dependent: :destroy
 
   with_options presence: true do
     validates :images
@@ -24,4 +26,9 @@ class Item < ApplicationRecord
   validates :price,
             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'は設定範囲外です' }
+  
+  def favorited?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+  
 end

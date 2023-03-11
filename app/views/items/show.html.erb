@@ -76,8 +76,24 @@
     </table>
     <div class="option">
       <div class="favorite-btn">
+   <% if user_signed_in? %>
+       <% if @item.favorited?(current_user) %>
+        <%# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ%>
+        <%= link_to item_favorites_path(@item.id), method: :delete do %>
         <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り 0</span>
+        <span>お気に入り</span><%= @faivorites_count %>
+        <% end %>
+       <% else %>
+        <%# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ %>
+        <%= link_to item_favorites_path(@item.id), method: :post do %>
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り</span><%= @faivorites_count %>
+        <% end %>
+       <% end %>
+    <% else %>
+     <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り</span><%= @faivorites_count %>
+     <% end %>
       </div>
       <div class="report-btn">
         <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
