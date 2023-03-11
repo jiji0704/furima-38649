@@ -6,11 +6,6 @@ class ItemsController < ApplicationController
 
   def index
     @item = Item.all.order('created_at DESC')
-
-    # @favorites_item = Item.find_by(id: params[:id])
-    # @user = @favorites_item.user
-    # 変数@faivorites_countを定義
-    # @faivorites_count = Favorite.where(item_id: @favorites_item.id).count
     @item_faivorites_count = Favorite.select(:item_id).count
   end
 
