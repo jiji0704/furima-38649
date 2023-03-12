@@ -27,6 +27,9 @@ class ItemsController < ApplicationController
     @user = @favorites_item.user
     # 変数@faivorites_countを定義
     @faivorites_count = Favorite.where(item_id: @favorites_item.id).count
+
+    @comments = @item.comments.includes(:user)
+    @comment = Comment.new
   end
 
   def edit
