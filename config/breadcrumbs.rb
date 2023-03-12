@@ -17,25 +17,25 @@ crumb :items do
   parent :root
 end
 
-crumb :items_show do
-  if params[:item_id] == nil
-    item = Item.find(params[:id])
-  else
-    item = Item.find(params[:item_id])
-  end
+crumb :items_show do |item|  # このブロック変数「item」の中身を定義する必要がある
   link "商品詳細", item_path(item.id)
   parent :root
 end
 
-crumb :items_edit do
-  item = Item.find(params[:id])
+crumb :items_edit do |item|
+  #item = Item.find(params[:id])
   link "商品情報の編集", edit_item_path(item.id)
-  parent :items_show
+  parent :items_show, item
 end
 
-crumb :orders do
-  item = Item.find(params[:item_id])
-  link "商品購入", item_orders_path(item.id)
- 
-  parent :items_show
+crumb :orders do |item|
+  # item = Item.find(params[:item_id])
+  link "商品購入", item_orders_path(item.id) 
+  parent :items_show, item
 end
+
+  # if params[:item_id] == nil
+  #   item = Item.find(params[:id])
+  # else
+  #   item = Item.find(params[:item_id])
+  # end
