@@ -4,7 +4,7 @@ class OrderShipping
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'は不正な値です。 次のように入力してください (例 123-4567)' }
-    validates :prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :prefecture_id, numericality: { other_than: 1, message: 'を入力してください' }
     validates :city
     validates :addresses
     validates :phone_number, numericality: { only_integer: true, message: 'は不正な値です。数字で入力してください' }
