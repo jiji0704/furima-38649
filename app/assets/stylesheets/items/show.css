@@ -144,7 +144,7 @@
 .comment-box {
   width: 40vw;
   background-color: #fff;
-  margin: 5vh 0;
+  margin: 1vh 0;
   text-align: center;
 }
 
@@ -204,4 +204,18 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 23px;
+}
+
+/* /コメント機能で追加 */
+.comment-index{
+  width: 40vw;
+  background-color: #fff;
+  margin: 5vh 0;
+  text-align: center;
+  padding: 20px;
+}
+
+.comment {
+  justify-content: left;
+  text-align: left;
 }
