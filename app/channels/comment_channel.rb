@@ -3,7 +3,6 @@ class CommentChannel < ApplicationCable::Channel
     @item = Item.find(params[:item_id]) # 追記
     stream_for @item # 追記
     
-    # stream_from "comment_channel" #追加
   end
 
   def unsubscribed

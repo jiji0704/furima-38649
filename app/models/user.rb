@@ -17,6 +17,6 @@ class User < ApplicationRecord
   has_many :orders
 
   has_many :favorites, dependent: :destroy
-  has_many :comments
+  has_many :comments, dependent: :destroy
   
 end
