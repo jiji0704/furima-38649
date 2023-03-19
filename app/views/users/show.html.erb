@@ -1,0 +1,65 @@
+<%= render "shared/second-header"%>
+<div class="user-show">
+  <div class="user-box">
+
+                    <h2 class="name">
+                    <%= "#{@user.nickname}さんの情報"%>
+                    </h2>
+
+
+                    <table class="detail-table">
+                    <tbody>
+                    <tr>
+                    <th class="detail-item">名前</th>
+                    <td class="detail-value"><%= "#{@user.last_name}" "  " "#{@user.first_name}" %></td>
+                    </tr>
+                    <tr>
+                    <th class="detail-item">ナマエ</th>
+                    <td class="detail-value"><%= "#{@user.last_name_kana}" "  " "#{@user.first_name_kana}" %></td>
+                    </tr>
+                    <tr>
+                    <th class="detail-item">生年月日</th>
+                    <td class="detail-value"><%="#{@date.year}年#{@date.month}月#{@date.day}日"%></td>
+                    </tr>
+                    </tbody>
+                    </table>
+  </div> 
+  <div class="user-item-box">
+                    <h3 class="name">
+                    <%= "#{@user.nickname}さんの出品情報"%>
+                    </h3>
+                    <ul class='item-lists'>
+                      <% @items.each do |item| %>
+                        <li class='list'>
+                            <%= link_to item_path(item.id) do %>
+                                <div class='item-img-content'>
+                                    <%= image_tag item.images[0], class: "item-img" %>
+
+                                    <% if item.order.present? %>
+                                      <div class='sold-out'>
+                                          <span>Sold Out!!</span>
+                                      </div> 
+                                    <% end %>
+                                </div>
+
+                                <div class='item-info'>
+                                    <h3 class='item-name'>
+                                    <%= item.name %>
+                                    </h3>
+                                    <div class='item-price'>
+                                      <span><%= item.price %>円<br><%= item.shipping_fee_status.name %></span>
+                                      <div class='star-btn'>
+                                        <%= image_tag "star.png", class:"star-icon" %>
+                                        <span class='star-count'><%= @faivorites_count %></span>
+                                      </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+
+  </div>
+</div>
+
+<%= render "shared/footer" %>
