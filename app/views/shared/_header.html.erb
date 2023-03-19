@@ -2,13 +2,39 @@
 <header class='top-page-header'>
   <div class='search-bar-contents'>
     <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <form class="search-form" action="#">
+
+    <%# <div class="search-form" action="#">  
+      <input class='input-box' placeholder='キーワードから探す'>
+        <%= link_to(search_items_path, class: 'search-button') do %>
+        <%# <%= image_tag "search.png", class:"search-icon" %>
+        <%# <% end %>
+    <%# </div>  %> 
+     
+    <%= search_form_for Item.ransack(params[:q]), url: search_items_path, html: {class: "search-form"} do |f| %>
+      <%= f.text_field :name, placeholder: '商品名から探す', class: 'input-box' %>
+      <br>
+      <%= f.label :submit, class: "search-button" do %>
+        <%# <input type="submit" value="" class="search-button"> %>
+         <%= image_tag "search.png", class:"search-icon" %>
+        <%= f.submit :submit, id: "q_submit", style: "display: none;"%>
+      <% end %>
+  
+    <% end %>
+
+<%= link_to(new_item_path, class: 'purchase-btn') do %>
+  <span class='purchase-btn-text'>出品する</span>
+  <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+<% end %>
+
+    <%# <form class="search-form" action="#">
       <input class='input-box' placeholder='キーワードから探す'>
       <button class="search-button">
         <%= image_tag "search.png", class:"search-icon" %>
-      </button>
-    </form>
+       <%# </button> %>
+    <%# </form>  %> 
   </div>
+
+
   <div class='nav'>
     <ul class='lists-left'>
       <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>

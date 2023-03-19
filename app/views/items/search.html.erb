@@ -1,0 +1,74 @@
+<%= render "shared/header" %>
+
+<div class='item-contents'>
+  <h2 class='title'>検索結果</h2>
+  <div class="subtitle" >
+    検索結果
+  </div>
+  <%= search_form_for @q, url: search_items_path, html: {id: "detailed-search-form"} do |f| %>
+    <div class="search-field">
+      <%= f.label :name, '商品名' %>
+      <br>
+      <%= f.text_field :name, placeholder: '商品名' , value: params[:q]&.dig(:name) %>
+    </div>
+    <div class="search-field">
+      <%= f.label :user_nickname_cont, '出品者名' %>
+      <br>
+      <%= f.text_field :user_nickname_cont, placeholder: '出品者名' %>
+    </div>
+    <div class="search-field">
+      <%= f.label :category_id_eq, 'カテゴリー' %>
+      <br>
+      <%# <%= f.collection_select(:category_id_eq, Category.all, :id, :name, {include_blank: "選択してください"}) %> 
+      <%= f.collection_check_boxes(:category_id_in, Category.all, :id, :name, {include_blank: "---"}) %>
+    </div>
+    <div class="search-field">
+      <%= f.label :price_gteq, '価格'%>
+      <br>
+      <%= f.number_field :price_gteq %> 円以上
+      <br>
+      <%= f.number_field :price_lteq %> 円以下
+    </div>
+    <%= f.submit '検索' %>
+  <% end %>
+
+  <ul class='item-lists'>
+
+    <% if @item.exists?%> 
+    <% @item.each do |item| %>
+    <li class='list'>
+      <%= link_to item_path(item.id) do %>
+      <div class='item-img-content'>
+        <%= image_tag item.images[0], class: "item-img" %>
+
+        <% if item.order.present? %>
+          <div class='sold-out'>
+          <span>Sold Out!!</span>
+        </div> 
+        <% end %>
+
+      </div>
+      <div class='item-info'>
+        <h3 class='item-name'>
+          <%= item.name %>
+        </h3>
+        <div class='item-price'>
+          <span><%= item.price %>円<br><%= item.shipping_fee_status.name %></span>
+          <div class='star-btn'>
+            <%= image_tag "star.png", class:"star-icon" %>
+            <span class='star-count'><%= @faivorites_count %></span>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </li>
+    <% end %>
+
+    <% else %>
+     <h5>該当する商品はありません</h5>
+    <% end %> 
+  </ul>
+  
+</div>
+
+<%= render "shared/footer" %>
