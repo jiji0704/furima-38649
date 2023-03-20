@@ -16,7 +16,7 @@ class Item < ApplicationRecord
     validates :images
     validates :name
     validates :info
-    validates :category_id, numericality: { other_than: 1, message: 'を入力してください' }
+    validates :category_id, numericality: { other_than: 0, message: 'を入力してください' }
     validates :sales_status_id, numericality: { other_than: 1, message: 'を入力してください' }
     validates :shipping_fee_status_id, numericality: { other_than: 1, message: 'を入力してください' }
     validates :prefecture_id, numericality: { other_than: 1, message: 'を入力してください' }
