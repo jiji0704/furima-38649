@@ -29,7 +29,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('商品の説明を入力してください')
       end
       it '商品の詳細・カテゴリーが---では登録できない' do
-        @item.category_id = '1'
+        @item.category_id = '0'
         @item.valid?
         expect(@item.errors.full_messages).to include('カテゴリーを入力してください')
       end
