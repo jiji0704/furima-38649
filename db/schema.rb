@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_18_084145) do
+ActiveRecord::Schema.define(version: 2023_03_21_075121) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -87,10 +87,15 @@ ActiveRecord::Schema.define(version: 2023_03_18_084145) do
     t.index ["order_id"], name: "index_shippings_on_order_id"
   end
 
-  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "tag_name", null: false
+  create_table "userinfos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "job", null: false
+    t.string "hoby", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_userinfos_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -118,4 +123,5 @@ ActiveRecord::Schema.define(version: 2023_03_18_084145) do
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
   add_foreign_key "shippings", "orders"
+  add_foreign_key "userinfos", "users"
 end

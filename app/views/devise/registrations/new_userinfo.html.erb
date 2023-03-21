@@ -1,0 +1,73 @@
+<%= render "shared/second-header"%>
+
+
+<%# <%= form_for @userinfo do |f| %> 
+<%= form_with model: @userinfo, class: 'registration-main', local: true do |f| %>
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      会員情報入力ー住所・お仕事・趣味ー
+    </h1>
+  </div>
+  <%= render 'shared/error_messages',model: f.object , resource: @userinfo %>
+
+  <div class="form-group">
+    <p class='form-info-header'>
+      本人確認
+    </p>
+    <p class='form-info-text'>
+      安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+    </p>
+  </div>
+
+  <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">郵便番号</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :postal_code, class:"input-default", id:"postal-code", placeholder:"例）123-4567", maxlength:"8" %>
+  </div>
+
+  <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">都道府県</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>
+  </div>
+
+  <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">お仕事</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :job, class:"input-default", id:"job", placeholder:"例）アパレル" %>
+  </div>
+
+  <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">趣味</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :hoby, class:"input-default", id:"hoby", placeholder:"例）読書" %>
+         <p class='info-text'>※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。</p>
+  </div>
+
+  <div class="form-group">
+    <h2 class='form-bottom-text'>
+      「会員登録」のボタンを押すことにより、
+      <span>利用規約</span>
+      <br>に同意したものとみなします
+    </h2>
+  </div>
+
+  <div class='register-btn'>
+    <%= f.submit "会員登録" ,class:"register-red-btn" %>
+  </div>
+ <p class='register-info'>本人情報の登録について</p>
+</div>
+<% end %>
+</div>
+</div>
+<%= render "shared/second-footer"%>
+
