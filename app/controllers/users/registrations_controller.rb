@@ -32,6 +32,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session["devise.regist_data"]["user"].clear
     sign_in(:user, @user)
   end
+
+  def search
+    return nil if params[:keyword] == ""
+    job = Userinfo.where(['job LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: job }
+  end
  
   private
  

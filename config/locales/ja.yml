@@ -18,6 +18,12 @@ ja:
         prefecture_id: 発送元の地域
         scheduled_delivery_id: 発送までの日数
         price: 販売価格
+    attributes:
+      userinfo:
+        postal_code: 郵便番号
+        prefecture_id: 都道府県
+        job: 仕事
+        hoby: 趣味
 
   activemodel:
     attributes:
