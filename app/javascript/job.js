@@ -30,3 +30,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       };
     });
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+//             const searchResult = document.getElementById("search-result");
+//             searchResult.innerHTML = "";
+//             if (XHR.response) {
+//               const job = XHR.response.keyword;
+//               job.forEach((job) => {
+//             const childElement = document.createElement("div");
+//             childElement.setAttribute("class", "child");
+//             childElement.setAttribute("id", job.id);
+//             childElement.innerHTML = job.job;
+//             searchResult.appendChild(childElement);
+//             const clickElement = document.getElementById(job.id);
+//             clickElement.addEventListener("click", () => {
+//             document.getElementById("job").value = clickElement.textContent;
+//             clickElement.remove();
+//           });
+//         });
+//       };
+//     };
+//   });
+// };
+// });
