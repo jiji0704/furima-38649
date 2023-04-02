@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'userinfos', to: 'users/registrations#new_userinfo'
     post 'userinfos', to: 'users/registrations#create_userinfo'
-    get 'userinfos', to: 'users/registrations#search_userinfo'
-  end
+    get 'userinfos/search', to: 'users/registrations#search'
+  end    
+  
   root to: "items#index"
   resources :items do
     resources :orders, only: [:index, :create]
@@ -16,9 +17,6 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
-  resources :users, only: [:show] do
-    collection do
-      get 'search'
-    end
-  end
+
+  resources :users, only: :show
 end

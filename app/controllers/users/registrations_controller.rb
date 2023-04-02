@@ -35,7 +35,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def search
     return nil if params[:keyword] == ""
-    job = Job.where(['job LIKE ?', "%#{params[:keyword]}%"] )
+    job = Userinfo.where(['job LIKE ?', "%#{params[:keyword]}%"] )
     render json:{ keyword: job }
   end
  
