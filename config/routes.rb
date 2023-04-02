@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'userinfos/search', to: 'users/registrations#search'
   end    
   
+  
   root to: "items#index"
   resources :items do
     resources :orders, only: [:index, :create]
