@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: :show
 
   def show
     @user = User.find(params[:id])
     @date = @user.birth_date
+    @userinfo = current_user.userinfo
+
     @items = current_user.items
+    @orders = Order.where(user_id: current_user.id)
+    # item =  Item.find(item_id: params[:item_id])
+    # binding.pry
   end
 
-  # def set_user
-  #   # @buyitem = Item.find(item_id: params[:item_id])
-  #   @userinfo = Userinfo.find(params[:user_id])
-  # end
 end
