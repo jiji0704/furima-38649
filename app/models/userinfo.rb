@@ -1,4 +1,7 @@
 class Userinfo < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :prefecture
+  
   belongs_to :user, optional: true
 
   with_options presence: true do

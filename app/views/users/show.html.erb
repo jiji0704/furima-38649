@@ -1,4 +1,6 @@
-<%= render "shared/second-header"%>
+<%= render "shared/header" %>
+<% breadcrumb :users %>
+
 <div class="user-show">
   <div class="user-box">
     <h2 class="name">
@@ -18,8 +20,59 @@
           <th class="detail-item">生年月日</th>
           <td class="detail-value"><%="#{@date.year}年#{@date.month}月#{@date.day}日"%></td>
         </tr>
+
+        <tr>
+          <th class="detail-item">郵便番号</th>
+          <td class="detail-value"><%= "#{@userinfo.postal_code}"  %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">都道府県</th>
+          <td class="detail-value"><%= "#{@userinfo.prefecture.name}"  %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">お仕事</th>
+          <td class="detail-value"><%= "#{@userinfo.job}"  %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">趣味</th>
+          <td class="detail-value"><%= "#{@userinfo.hoby}"  %></td>
+        </tr>
+
       </tbody>
     </table>
+  
+  <table class="detail-table">
+  <% if current_user != @user %>
+    <% if @user.followed_by?(current_user) %>
+    <h2 class="name">
+      <%= "あなたは#{@user.nickname}さんをフォロー中です"%>
+    </h2>
+      <%=link_to "フォロー中", user_relationships_path(@user.id),class: "item-blue-btn" , method: :delete %>
+    <% else %>
+    <h3><%= "あなたは#{@user.nickname}さんをフォローしますか"%></h3>
+      <%=link_to "フォローする", user_relationships_path(@user.id),class: "item-red-btn" ,method: :post %>
+    <% end %>
+  <% end %>
+  </table>
+
+  <table class="detail-table">
+    <h2 class="name">
+     <%= "#{@user.nickname}さんがフォローしているユーザー"%>
+    </h2>
+    <% @user.followings.each do |user| %>
+      <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
+    <% end %>
+  </table>
+
+  <table class="detail-table">
+    <h2 class="name">
+     <%= "#{@user.nickname}さんのフォローワー"%>
+    </h2>
+    <% @user.followers.each do |user| %>
+      <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
+    <% end %>
+  </table>
+
   </div> 
 
   <div class="user-item-box">
@@ -45,6 +98,36 @@
               </h3>
               <div class='item-price'>
                 <span><%= item.price %>円<br><%= item.shipping_fee_status.name %></span>
+                  <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'><%= @faivorites_count %></span>
+                  </div>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="user-item-box">
+    <h3 class="name">
+      <%= "#{@user.nickname}さんの購入情報"%>
+    </h3>
+     <ul class='item-lists'>
+      <% @orders.each do |order| %>
+        <li class='list'>
+          <%= link_to item_path(order.item.id) do %>
+            <div class='item-img-content'>
+              <%= image_tag order.item.images[0], class: "item-img" %>
+            </div>
+
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= order.item.name %>
+              </h3>
+              <div class='item-price'>
+                <span><%= order.item.price %>円<br><%= order.item.shipping_fee_status.name %></span>
                   <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'><%= @faivorites_count %></span>

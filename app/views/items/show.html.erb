@@ -76,6 +76,9 @@
         </tr>
       </tbody>
     </table>
+
+<%= link_to "#{@item.user.nickname}さんの他の商品", user_path(@item.user_id), class:"item-red-btn"%>
+
     <div class="option">
       <div class="favorite-btn">
    <% if user_signed_in? %>
