@@ -1,4 +1,6 @@
-<%= render "shared/second-header"%>
+<%= render "shared/header" %>
+<% breadcrumb :users %>
+
 <div class="user-show">
   <div class="user-box">
     <h2 class="name">
@@ -38,6 +40,39 @@
 
       </tbody>
     </table>
+  
+  <table class="detail-table">
+  <% if current_user != @user %>
+    <% if @user.followed_by?(current_user) %>
+    <h2 class="name">
+      <%= "あなたは#{@user.nickname}さんをフォロー中です"%>
+    </h2>
+      <%=link_to "フォロー中", user_relationships_path(@user.id),class: "item-blue-btn" , method: :delete %>
+    <% else %>
+    <h3><%= "あなたは#{@user.nickname}さんをフォローしますか"%></h3>
+      <%=link_to "フォローする", user_relationships_path(@user.id),class: "item-red-btn" ,method: :post %>
+    <% end %>
+  <% end %>
+  </table>
+
+  <table class="detail-table">
+    <h2 class="name">
+     <%= "#{@user.nickname}さんがフォローしているユーザー"%>
+    </h2>
+    <% @user.followings.each do |user| %>
+      <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
+    <% end %>
+  </table>
+
+  <table class="detail-table">
+    <h2 class="name">
+     <%= "#{@user.nickname}さんのフォローワー"%>
+    </h2>
+    <% @user.followers.each do |user| %>
+      <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
+    <% end %>
+  </table>
+
   </div> 
 
   <div class="user-item-box">
@@ -82,7 +117,7 @@
      <ul class='item-lists'>
       <% @orders.each do |order| %>
         <li class='list'>
-          <%= link_to item_path(order.id) do %>
+          <%= link_to item_path(order.item.id) do %>
             <div class='item-img-content'>
               <%= image_tag order.item.images[0], class: "item-img" %>
             </div>

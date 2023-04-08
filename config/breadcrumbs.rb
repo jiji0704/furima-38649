@@ -3,7 +3,7 @@ crumb :root do
 end
 
 crumb :uers_registration do
-  link "新規登録", new_user_registration_path
+  link "新規登録1", new_user_registration_path
   parent :root
 end
 
@@ -34,8 +34,17 @@ crumb :orders do |item|
   parent :items_show, item
 end
 
-  # if params[:item_id] == nil
-  #   item = Item.find(params[:id])
-  # else
-  #   item = Item.find(params[:item_id])
-  # end
+crumb :users do
+  link "ユーザーページ", user_path
+  parent :root
+end
+
+crumb :items do
+  link "検索する", search_items_path
+  parent :root
+end
+
+crumb :userinfos do
+  link "新規登録2", userinfos_path
+  parent :uers_registration
+end
