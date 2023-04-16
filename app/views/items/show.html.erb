@@ -83,7 +83,6 @@
       <div id="favorite-btn<%= @item.id %>">
    <% if user_signed_in? %>
         <%= render partial: "favorites/favorite", locals: { item: @item } %>  
-        <%# <%= render "favorites/favorite", item: @item  %> 
     <% else %>
      <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
         <span>お気に入り</span><%= @faivorites_count %>
