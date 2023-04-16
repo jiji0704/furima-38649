@@ -80,21 +80,9 @@
 <%= link_to "#{@item.user.nickname}さんの他の商品", user_path(@item.user_id), class:"item-red-btn"%>
 
     <div class="option">
-      <div class="favorite-btn">
+      <div id="favorite-btn<%= @item.id %>">
    <% if user_signed_in? %>
-       <% if @item.favorited?(current_user) %>
-        <%# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ%>
-        <%= link_to item_favorite_path(@item.id), method: :delete do %>
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り</span><%= @faivorites_count %>
-        <% end %>
-       <% else %>
-        <%# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ %>
-        <%= link_to item_favorites_path(@item.id), method: :post do %>
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り</span><%= @faivorites_count %>
-        <% end %>
-       <% end %>
+        <%= render partial: "favorites/favorite", locals: { item: @item } %>  
     <% else %>
      <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
         <span>お気に入り</span><%= @faivorites_count %>

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   root to: "items#index"
   resources :items do
     resources :orders, only: [:index, :create]
-    resources :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
     resources :comments, only: :create
     collection do
       get 'search'
